@@ -45,7 +45,7 @@ class TestAuthorizationFromRegistrationPage:
     def test_success_authorization_from_registration_page(self, driver):
          #arrange
         driver.get(curl.registration)
-        driver.find_element(*locators.Button.LOGIN_IN).click()
+        driver.find_element(*locators.Text.LOGIN_IN).click()
         WebDriverWait(driver, 10).until(EC.url_to_be(curl.pers_acc))
         driver.find_element(*locators.Field.EMAIL).send_keys(data.registered_user['e-mail'])
         driver.find_element(*locators.Field.PASSWORD).send_keys(data.registered_user['password'])
@@ -61,7 +61,7 @@ class TestAuthorizationFromPasswordRecoveryPage:
     def test_success_authorization_from_password_recovery_page(self, driver):
          #arrange
         driver.get(curl.pass_rec)
-        driver.find_element(*locators.Button.LOGIN_IN).click()
+        driver.find_element(*locators.Text.LOGIN_IN).click()
         WebDriverWait(driver, 10).until(EC.url_to_be(curl.pers_acc))
         driver.find_element(*locators.Field.EMAIL).send_keys(data.registered_user['e-mail'])
         driver.find_element(*locators.Field.PASSWORD).send_keys(data.registered_user['password'])

@@ -8,28 +8,6 @@ import locators
 import curl
 
 #проверка перехода к разделам конструктора
-# class TestConstructor:
-
-#    def test_constructor(self, authorized_driver):
-        
-#         # arrange
-#         driver = authorized_driver
-#         driver.find_element(*locators.Button.CONSTRUCTOR).click()
-#         WebDriverWait(driver, 10).until(EC.url_to_be(curl.main_site))
-
-#         # act
-#         driver.find_element(*locators.Button.SAUCES).click()
-#         WebDriverWait(driver, 10).until(EC.visibility_of_element_located(*locators.Text.SAUCES))
-#         driver.find_element(*locators.Button.BUNS).click()
-#         WebDriverWait(driver, 10).until(EC.visibility_of_element_located(*locators.Text.BUNS))
-#         driver.find_element(*locators.Button.FILLINGS).click()
-#         WebDriverWait(driver, 10).until(EC.visibility_of_element_located(*locators.Text.FILLINGS))
-
-#         # assert
-#         assert driver.find_element(*locators.Text.SAUCES).is_displayed()
-#         assert driver.find_element(*locators.Text.BUNS).is_displayed()
-#         assert driver.find_element(*locators.Text.FILLINGS).is_displayed()
-
 
 class TestConstructor:
 
@@ -42,7 +20,7 @@ class TestConstructor:
         driver = authorized_driver
 
         # arrange
-        driver.find_element(*locators.Button.CONSTRUCTOR).click()
+       
         WebDriverWait(driver, 10).until(EC.url_to_be(curl.main_site))
 
 
