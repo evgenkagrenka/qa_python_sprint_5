@@ -2,31 +2,60 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+import pytest
 import data 
-from locators import TestLocators
+import locators 
 import curl
 
 #проверка перехода к разделам конструктора
+# class TestConstructor:
+
+#    def test_constructor(self, authorized_driver):
+        
+#         # arrange
+#         driver = authorized_driver
+#         driver.find_element(*locators.Button.CONSTRUCTOR).click()
+#         WebDriverWait(driver, 10).until(EC.url_to_be(curl.main_site))
+
+#         # act
+#         driver.find_element(*locators.Button.SAUCES).click()
+#         WebDriverWait(driver, 10).until(EC.visibility_of_element_located(*locators.Text.SAUCES))
+#         driver.find_element(*locators.Button.BUNS).click()
+#         WebDriverWait(driver, 10).until(EC.visibility_of_element_located(*locators.Text.BUNS))
+#         driver.find_element(*locators.Button.FILLINGS).click()
+#         WebDriverWait(driver, 10).until(EC.visibility_of_element_located(*locators.Text.FILLINGS))
+
+#         # assert
+#         assert driver.find_element(*locators.Text.SAUCES).is_displayed()
+#         assert driver.find_element(*locators.Text.BUNS).is_displayed()
+#         assert driver.find_element(*locators.Text.FILLINGS).is_displayed()
+
+
 class TestConstructor:
 
-   def test_constructor(self, authorized_driver):
-        
-        # arrange
+    @pytest.mark.parametrize("button,text", [
+        (locators.Button.SAUCES, locators.Text.TEXT_SAUCES),
+        (locators.Button.BUNS, locators.Text.TEXT_BUNS),
+        (locators.Button.FILLINGS, locators.Text.TEXT_FILLINGS)
+    ])
+    def test_constructor_tabs(self, authorized_driver, button, text):
         driver = authorized_driver
-        driver.find_element(*TestLocators.CONSTRUCTOR).click()
+
+        # arrange
+        driver.find_element(*locators.Button.CONSTRUCTOR).click()
         WebDriverWait(driver, 10).until(EC.url_to_be(curl.main_site))
 
+
+        if driver.find_element(*locators.Text.TEXT_BUNS):
+            driver.find_element(*locators.Button.SAUCES).click()
+            WebDriverWait(driver, 10).until(
+                EC.visibility_of_element_located(locators.Text.TEXT_SAUCES)
+            )
+
         # act
-        driver.find_element(*TestLocators.SAUCES).click()
-        WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//h2[text() = 'Соусы']")))
-        driver.find_element(*TestLocators.BUNS).click()
-        WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//h2[text() = 'Булки']")))
-        driver.find_element(*TestLocators.FILLINGS).click()
-        WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//h2[text() = 'Начинки']")))
+        driver.find_element(*button).click()
+        WebDriverWait(driver, 10).until(EC.visibility_of_element_located(text))
+
 
         # assert
-        assert driver.find_element(By.XPATH, "//h2[text() = 'Соусы']").is_displayed()
-        assert driver.find_element(By.XPATH, "//h2[text() = 'Булки']").is_displayed()
-        assert driver.find_element(By.XPATH, "//h2[text() = 'Начинки']").is_displayed()
-
- 
+        assert driver.find_element(*text).is_displayed()

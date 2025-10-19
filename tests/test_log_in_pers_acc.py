@@ -3,7 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 import data 
-from locators import TestLocators
+import locators
 import curl
 
 #проверка перехода в личный кабинет авторизованного пользователя
@@ -14,7 +14,7 @@ class TestLogInPersAcc:
         driver = authorized_driver
 
         # act
-        driver.find_element(*TestLocators.PERSONAL_ACCOUNT).click()
+        driver.find_element(*locators.Button.PERSONAL_ACCOUNT).click()
         WebDriverWait(driver, 10).until(EC.url_to_be(curl.account))
 
         # assert

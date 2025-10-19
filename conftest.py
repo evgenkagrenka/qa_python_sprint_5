@@ -1,7 +1,7 @@
 import pytest
 import curl
 import data
-from locators import TestLocators
+import locators 
 from selenium import webdriver
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
@@ -22,9 +22,9 @@ def authorized_driver(driver):
     driver.get(curl.pers_acc)
 
     # Вводим данные пользователя
-    driver.find_element(*TestLocators.EMAIL).send_keys(data.registered_user['e-mail'])
-    driver.find_element(*TestLocators.PASSWORD).send_keys(data.registered_user['password'])
-    driver.find_element(*TestLocators.LOGIN_BUTTON).click()
+    driver.find_element(*locators.Field.EMAIL).send_keys(data.registered_user['e-mail'])
+    driver.find_element(*locators.Field.PASSWORD).send_keys(data.registered_user['password'])
+    driver.find_element(*locators.Button.LOGIN_BUTTON).click()
 
     # Возвращаем уже авторизованный драйвер
     return driver

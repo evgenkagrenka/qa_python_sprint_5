@@ -9,3 +9,5 @@ new_user_wrong_password = {'name': 'Evgeniya',
 registered_user = {'name': 'Evgeniya',
                    'e-mail': 'evgeniya_shimkova33fs678@ya.ru',
                    'password': '123456'}
+
+incorrect_password_text = 'Некорректный пароль'
