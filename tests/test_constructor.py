@@ -29,6 +29,10 @@ class TestConstructor:
             WebDriverWait(driver, 10).until(
                 EC.visibility_of_element_located(locators.Text.TEXT_SAUCES)
             )
+            driver.find_element(*locators.Button.BUNS).click()
+            WebDriverWait(driver, 10).until(
+                EC.visibility_of_element_located(locators.Text.TEXT_BUNS)
+            )
 
         # act
         driver.find_element(*button).click()
